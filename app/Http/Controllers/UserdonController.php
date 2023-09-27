@@ -15,18 +15,27 @@ class UserdonController extends Controller
         return view('index', ['data'=> $data]);
 
 }
-    public function donate(){
+public function donate(){
     return view('donate');
+}
+public function payment(Request $request){
+    $donationValue = $request->input('done');
+    
+    return view('payment')->with('donationValue', $donationValue);
 }
     public function store(Request $request){
      $data = $request->validate([
         'name' => 'required',
         'done' => 'required|numeric'
     ]);
-    
+
     $newUserdon = Usersdon::create($data);
-    
-    return redirect(route('index'))->with('success', 'Thanks for donating');
+    $donationValue = $request->input('done');
+    // Other donation processing logic...
+
+    return redirect()->route('payment', ['done' => $donationValue]);
 }
 
+    
 }
+

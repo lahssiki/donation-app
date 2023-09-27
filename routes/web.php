@@ -18,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UserdonController::class, 'index'])->name('index');
 Route::get('/donate', [UserdonController::class, 'donate'])->name('donate');
 Route::post('/donate', [UserdonController::class, 'store'])->name('donate.store');
+Route::get('/payment', [UserdonController::class, 'payment'])->name('payment');
 
